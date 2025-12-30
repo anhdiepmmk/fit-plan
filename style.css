@@ -1,0 +1,217 @@
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --accent-gradient: linear-gradient(135deg, #00dbde 0%, #fc00ff 100%);
+    --card-bg: rgba(255, 255, 255, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.4);
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: #f0f2f5;
+    color: #2d3436;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Background Animated Blobs */
+.background-blobs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.blob {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: var(--primary-gradient);
+    filter: blur(80px);
+    opacity: 0.15;
+    border-radius: 50%;
+    animation: move 20s infinite alternate;
+}
+
+.blob-1 { top: -10%; left: -10%; background: #667eea; }
+.blob-2 { bottom: -10%; right: -10%; background: #764ba2; animation-delay: -5s; }
+.blob-3 { top: 40%; left: 30%; background: #00dbde; animation-delay: -10s; }
+
+@keyframes move {
+    from { transform: translate(0, 0) scale(1); }
+    to { transform: translate(10%, 10%) scale(1.1); }
+}
+
+.gradient-text {
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+}
+
+.form-control, .form-select {
+    border-radius: 12px;
+    padding: 12px 16px;
+    border: 1px solid #e0e0e0;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.form-control:focus, .form-select:focus {
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+    border-color: #667eea;
+}
+
+.btn-primary {
+    background: var(--primary-gradient);
+    border: none;
+    border-radius: 12px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+.stat-box {
+    padding: 20px 10px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--glass-border);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 140px;
+    position: relative;
+}
+
+.help-icon {
+    font-size: 0.85rem;
+    color: #a0a0a0;
+    cursor: pointer;
+    transition: color 0.2s;
+    margin-left: 4px;
+    vertical-align: middle;
+}
+
+.help-icon:hover {
+    color: #667eea;
+}
+
+/* Custom Tooltip */
+.custom-tooltip {
+    visibility: hidden;
+    width: 240px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    color: #2d3436;
+    text-align: left;
+    border-radius: 12px;
+    padding: 15px;
+    position: absolute;
+    z-index: 100;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.custom-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -8px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: rgba(255, 255, 255, 0.95) transparent transparent transparent;
+}
+
+/* Simplified hover logic */
+.stat-box > span:first-child {
+    position: relative;
+    display: inline-block;
+}
+
+.stat-box > span:first-child:hover .custom-tooltip {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(-50%) translateY(-10px);
+}
+
+.stat-box.target {
+    background: linear-gradient(135deg, rgba(168, 224, 99, 0.1) 0%, rgba(86, 171, 47, 0.1) 100%);
+    border-color: rgba(86, 171, 47, 0.2);
+}
+
+/* Meal Plan Grid */
+.meal-card {
+    transition: transform 0.3s;
+    height: 100%;
+}
+
+.meal-card:hover {
+    transform: translateY(-5px);
+}
+
+.meal-card.today {
+    border: 2px solid #764ba2;
+    box-shadow: 0 0 20px rgba(118, 75, 162, 0.2);
+}
+
+.today-badge {
+    position: absolute;
+    top: -10px;
+    right: 15px;
+    background: var(--primary-gradient);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.meal-item {
+    padding: 8px 0;
+    border-bottom: 1px dashed #eee;
+}
+
+.meal-item:last-child {
+    border-bottom: none;
+}
+
+.meal-item-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: block;
+}
+
+.meal-item-desc {
+    font-size: 0.8rem;
+    color: #636e72;
+}
+
+/* BMI Status Colors */
+.bmi-normal { color: #2ecc71 !important; }
+.bmi-warning { color: #f39c12 !important; }
+.bmi-danger { color: #e74c3c !important; }
+
