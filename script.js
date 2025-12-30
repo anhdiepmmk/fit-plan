@@ -1,62 +1,75 @@
-// Meal Plan Data
-const mealPlanData = [
-    {
-        day: "Thứ 2",
-        meals: [
-            { type: "Sáng", name: "Bánh mì đen & Trứng ốp la", desc: "2 lát bánh mì, 1 quả trứng, salad" },
-            { type: "Trưa", name: "Ức gà áp chảo & Bông cải xanh", desc: "150g ức gà, bông cải luộc, nửa bát cơm lứt" },
-            { type: "Tối", name: "Cá thu kho & Rau muống luộc", desc: "100g cá thu, rau muống, canh bí xanh" }
-        ]
-    },
-    {
-        day: "Thứ 3",
-        meals: [
-            { type: "Sáng", name: "Yến mạch & Sữa chua không đường", desc: "1 hũ sữa chua, 30g yến mạch, trái cây" },
-            { type: "Trưa", name: "Bò xào đỗ que", desc: "100g thịt bò, đỗ que xào ít dầu, 1 bát cơm lứt" },
-            { type: "Tối", name: "Salad ức gà xé", desc: "100g ức gà, xà lách, dưa chuột, sốt mè" }
-        ]
-    },
-    {
-        day: "Thứ 4",
-        meals: [
-            { type: "Sáng", name: "Khoai lang luộc & Sữa hạt", desc: "1 củ khoai vừa, 200ml sữa hạnh nhân" },
-            { type: "Trưa", name: "Tôm rim & Rau cải chíp", desc: "150g tôm, cải chíp luộc, nửa bát cơm lứt" },
-            { type: "Tối", name: "Canh đậu phụ nấu rong biển", desc: "2 bìa đậu, rong biển, 100g thịt băm" }
-        ]
-    },
-    {
-        day: "Thứ 5",
-        meals: [
-            { type: "Sáng", name: "Phở gà (ít bánh nhiều rau)", desc: "1 tô phở nhỏ, nhiều hành và rau thơm" },
-            { type: "Trưa", name: "Thịt lợn luộc & Dưa chuột", desc: "100g thịt thăn, dưa chuột, canh rau ngót" },
-            { type: "Tối", name: "Cá hồi nướng măng tây", desc: "100g cá hồi, măng tây, bí đỏ luộc" }
-        ]
-    },
-    {
-        day: "Thứ 6",
-        meals: [
-            { type: "Sáng", name: "Trứng xào cà chua & Bánh mì", desc: "1 quả trứng, 2 cà chua, 1 lát bánh mì đen" },
-            { type: "Trưa", name: "Mực xào dứa", desc: "150g mực, dứa, cần tây, nửa bát cơm lứt" },
-            { type: "Tối", name: "Đậu bắp luộc & Thịt băm", desc: "Đậu bắp, 100g thịt nạc băm, canh chua" }
-        ]
-    },
-    {
-        day: "Thứ 7",
-        meals: [
-            { type: "Sáng", name: "Bún chả (ăn vừa đủ)", desc: "Nửa suất bún, nhiều rau sống" },
-            { type: "Trưa", name: "Lẩu rau nấm", desc: "Nhiều loại nấm, rau xanh, đậu phụ, ít tôm" },
-            { type: "Tối", name: "Trái cây & Hạt điều", desc: "Táo, bưởi, 5-7 hạt điều" }
-        ]
-    },
-    {
-        day: "Chủ Nhật",
-        meals: [
-            { type: "Sáng", name: "Xôi gấc (lượng nhỏ)", desc: "1 nắm nhỏ xôi, nửa quả trứng luộc" },
-            { type: "Trưa", name: "Gà rang gừng & Bắp cải", desc: "100g gà, bắp cải luộc, 1 bát cơm lứt" },
-            { type: "Tối", name: "Canh bí đỏ nấu tôm", desc: "Bí đỏ, 50g tôm, rau xanh tùy chọn" }
-        ]
-    }
-];
+// Food pools for Vietnamese dishes (optimized for weight loss/health)
+const foodPools = {
+    morning: [
+        { name: "Phở gà (ít bánh)", desc: "Nước dùng trong, nhiều rau thơm, ức gà xé" },
+        { name: "Bún mọc", desc: "Nước dùng thanh, mọc nạc, nhiều dọc mùng" },
+        { name: "Cháo yến mạch thịt bằm", desc: "Yến mạch, thịt nạc bằm, hành lá, tiêu" },
+        { name: "Bánh mì đen & Trứng ốp", desc: "2 lát bánh mì nguyên cám, 1 trứng, xà lách" },
+        { name: "Sữa chua & Hạt điều", desc: "Sữa chua không đường, ngũ cốc hạt, trái cây ít ngọt" },
+        { name: "Khoai lang luộc & Sữa hạt", desc: "1 củ khoai vừa, 200ml sữa hạnh nhân không đường" },
+        { name: "Trứng xào cà chua & Bánh mì", desc: "1 quả trứng, cà chua, bánh mì đen" },
+        { name: "Bún thang (nhỏ)", desc: "Nhiều rau, trứng thái chỉ, giò lụa nạc, gà xé" },
+        { name: "Xôi đậu xanh (nhỏ)", desc: "Lượng xôi vừa phải, ăn kèm muối vừng" },
+        { name: "Nui lứt nấu thịt băm", desc: "Nui gạo lứt, nước dùng rau củ, thịt nạc" }
+    ],
+    lunch: [
+        { name: "Ức gà áp chảo & Súp lơ", desc: "150g gà, súp lơ xanh luộc, nửa bát cơm lứt" },
+        { name: "Bò xào thiên lý", desc: "100g thịt bò mỏng, hoa thiên lý, ít dầu mỡ" },
+        { name: "Tôm rim mặn ngọt & Rau cải", desc: "150g tôm, cải chíp luộc, nửa bát cơm lứt" },
+        { name: "Cá thu kho & Rau muống", desc: "1 khúc cá thu nhỏ, rau muống luộc lấy nước chanh" },
+        { name: "Thịt lợn luộc & Dưa chuột", desc: "100g thịt thăn luộc, dưa chuột tươi, canh rau ngót" },
+        { name: "Mực xào cần tỏi", desc: "150g mực, cần tây, tỏi tây, ít cơm lứt" },
+        { name: "Đậu phụ sốt cà chua", desc: "2 bìa đậu, cà chua tươi, canh rau cải" },
+        { name: "Gà rang gừng & Bắp cải", desc: "100g gà bỏ da, bắp cải luộc, 1 bát cơm lứt" },
+        { name: "Cá diêu hồng hấp gừng", desc: "Cá hấp, nhiều rau sống cuốn, không ăn kèm bún" },
+        { name: "Canh chua cá lóc", desc: "Cá lóc, dứa, cà chua, dọc mùng, ít cơm" }
+    ],
+    evening: [
+        { name: "Salad ức gà xé", desc: "Ức gà, xà lách, sốt mè, nhiều dưa chuột" },
+        { name: "Canh đậu phụ rong biển", desc: "Đậu phụ, rong biển, tôm khô/thịt băm, thanh đạm" },
+        { name: "Cá hồi nướng măng tây", desc: "100g cá hồi, măng tây, bí đỏ luộc" },
+        { name: "Nộm sứa & Rau thơm", desc: "Sứa, đu đủ xanh, cà rốt, lạc rang ít" },
+        { name: "Canh bí đỏ nấu tôm", desc: "Bí đỏ, tôm tươi, rau dền/mồng tơi" },
+        { name: "Lẩu rau nấm (mini)", desc: "Nấm các loại, đậu phụ, rau xanh, không mì" },
+        { name: "Súp gà ngô non", desc: "Gà xé, ngô ngọt, nấm hương, ít bột năng" },
+        { name: "Bún xào rau củ", desc: "Bún gạo lứt, nhiều rau cải, mộc nhĩ, đậu phụ" },
+        { name: "Thịt bò trộn salad", desc: "Bò tái lăn, xà lách, hành tây, cà chua bi" },
+        { name: "Trái cây & Hạt chia", desc: "Táo/Bưởi, sữa hạt, hạt chia (nhẹ bụng)" }
+    ]
+};
+
+let currentWeeklyPlan = [];
+
+function generateWeeklyPlan() {
+    const days = ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ Nhật"];
+    const plan = [];
+
+    // Simple shuffle helper
+    const shuffle = (array) => [...array].sort(() => Math.random() - 0.5);
+
+    let morningChoices = shuffle(foodPools.morning);
+    let lunchChoices = shuffle(foodPools.lunch);
+    let dinnerChoices = shuffle(foodPools.evening);
+
+    days.forEach((day, i) => {
+        // Reuse choices if we run out (though we have 10 each for 7 days)
+        const breakfast = morningChoices[i % morningChoices.length];
+        const lunch = lunchChoices[i % lunchChoices.length];
+        const dinner = dinnerChoices[i % dinnerChoices.length];
+
+        plan.push({
+            day: day,
+            meals: [
+                { type: "Sáng", name: breakfast.name, desc: breakfast.desc },
+                { type: "Trưa", name: lunch.name, desc: lunch.desc },
+                { type: "Tối", name: dinner.name, desc: dinner.desc }
+            ]
+        });
+    });
+
+    return plan;
+}
+
 
 // Mapping moment.js day to our index (Mon=0, ..., Sun=6)
 const dayMap = {
@@ -109,8 +122,10 @@ document.getElementById('calculator-form').addEventListener('submit', function(e
     else bmiStatus = "Béo phì";
 
     // 5. Update UI
+    currentWeeklyPlan = generateWeeklyPlan();
     displayResults(bmi, bmiStatus, bmr, tdee, target);
 });
+
 
 function displayResults(bmi, bmiStatus, bmr, tdee, target) {
     const bmiValEl = document.getElementById('bmi-val');
@@ -152,7 +167,7 @@ function renderMealPlan() {
 
     const todayIndex = dayMap[moment().day()];
 
-    mealPlanData.forEach((dayData, index) => {
+    currentWeeklyPlan.forEach((dayData, index) => {
         const isToday = index === todayIndex;
         
         const cardCol = document.createElement('div');
@@ -180,3 +195,4 @@ function renderMealPlan() {
         container.appendChild(cardCol);
     });
 }
+
