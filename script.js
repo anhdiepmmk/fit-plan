@@ -165,6 +165,15 @@ document.getElementById('calculator-form').addEventListener('submit', function(e
     // 5. Update UI
     currentWeeklyPlan = generateWeeklyPlan();
     displayResults(bmi, bmiStatus, bmr, tdee, target);
+
+    // 6. Send Event to Google Analytics
+    if (typeof gtag === 'function') {
+        gtag('event', 'calculate_meal_plan', {
+            'event_category': 'engagement',
+            'event_label': 'Calculation Result',
+            'value': 1
+        });
+    }
 });
 
 
