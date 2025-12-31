@@ -129,7 +129,7 @@ document.getElementById('calculator-form').addEventListener('submit', function(e
     const weight = parseFloat(document.getElementById('weight').value);
     const height = parseFloat(document.getElementById('height').value);
     const age = parseInt(document.getElementById('age').value);
-    const gender = document.getElementById('gender').value;
+    const gender = document.querySelector('input[name="gender"]:checked').value;
     const activity = parseFloat(document.getElementById('activity').value);
     const goal = document.getElementById('goal').value;
 
