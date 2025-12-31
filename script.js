@@ -83,12 +83,44 @@ const dayMap = {
 };
 
 // Real-time Slider Value Updates
+// Real-time Slider Value Updates with Stepper Buttons
 ['weight', 'height', 'age'].forEach(id => {
     const slider = document.getElementById(id);
     const display = document.getElementById(id + '-val');
-    slider.addEventListener('input', () => {
+    const btnDec = document.querySelector(`.btn-step[data-target="${id}"][data-action="dec"]`);
+    const btnInc = document.querySelector(`.btn-step[data-target="${id}"][data-action="inc"]`);
+
+    const updateUI = () => {
         display.innerText = slider.value;
-    });
+        
+        const val = parseFloat(slider.value);
+        const min = parseFloat(slider.min);
+        const max = parseFloat(slider.max);
+
+        if (btnDec) btnDec.disabled = val <= min;
+        if (btnInc) btnInc.disabled = val >= max;
+        
+        // Update track/thumb progress if desired, but default is fine
+    };
+
+    slider.addEventListener('input', updateUI);
+
+    // Initial state
+    updateUI();
+
+    if (btnDec) {
+        btnDec.addEventListener('click', () => {
+            slider.stepDown();
+            slider.dispatchEvent(new Event('input'));
+        });
+    }
+
+    if (btnInc) {
+        btnInc.addEventListener('click', () => {
+            slider.stepUp();
+            slider.dispatchEvent(new Event('input'));
+        });
+    }
 });
 
 document.getElementById('calculator-form').addEventListener('submit', function(e) {

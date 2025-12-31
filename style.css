@@ -241,6 +241,7 @@ body {
     border-radius: 3px;
 }
 
+
 .form-range::-moz-range-thumb {
     background: #667eea;
     border: 2px solid #fff;
@@ -248,3 +249,35 @@ body {
     width: 18px;
     height: 18px;
 }
+
+/* Stepper Buttons */
+.btn-step {
+    width: 32px;
+    height: 32px;
+    min-width: 32px; /* Prevent shrinking */
+    flex-shrink: 0;   /* Prevent shrinking */
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.8);
+    transition: all 0.2s;
+    color: #555;
+    font-size: 1.2rem;
+}
+
+.btn-step:hover:not(:disabled) {
+    background: white;
+    transform: translateY(-2px);
+    color: #667eea;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.btn-step:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+    background: rgba(200, 200, 200, 0.3);
+}
+

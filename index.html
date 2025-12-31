@@ -38,21 +38,45 @@
                                 <label class="form-label mb-0">Cân nặng (kg)</label>
                                 <span id="weight-val" class="fw-bold text-primary">90</span>
                             </div>
-                            <input type="range" id="weight" class="form-range" min="1" max="300" step="1" value="90">
+                            <div class="d-flex align-items-center gap-2">
+                                <button type="button" class="btn btn-light rounded-circle shadow-sm btn-step" data-action="dec" data-target="weight">
+                                    <i class="bi bi-dash"></i>
+                                </button>
+                                <input type="range" id="weight" class="form-range flex-grow-1 mx-2" min="1" max="300" step="1" value="90">
+                                <button type="button" class="btn btn-light rounded-circle shadow-sm btn-step" data-action="inc" data-target="weight">
+                                    <i class="bi bi-plus"></i>
+                                </button>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <label class="form-label mb-0">Chiều cao (cm)</label>
                                 <span id="height-val" class="fw-bold text-primary">170</span>
                             </div>
-                            <input type="range" id="height" class="form-range" min="1" max="350" step="1" value="170">
+                            <div class="d-flex align-items-center gap-2">
+                                <button type="button" class="btn btn-light rounded-circle shadow-sm btn-step" data-action="dec" data-target="height">
+                                    <i class="bi bi-dash"></i>
+                                </button>
+                                <input type="range" id="height" class="form-range flex-grow-1 mx-2" min="1" max="350" step="1" value="170">
+                                <button type="button" class="btn btn-light rounded-circle shadow-sm btn-step" data-action="inc" data-target="height">
+                                    <i class="bi bi-plus"></i>
+                                </button>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <div class="d-flex justify-content-between align-items-center mb-2">
                                 <label class="form-label mb-0">Tuổi</label>
                                 <span id="age-val" class="fw-bold text-primary">18</span>
                             </div>
-                            <input type="range" id="age" class="form-range" min="1" max="100" step="1" value="18">
+                            <div class="d-flex align-items-center gap-2">
+                                <button type="button" class="btn btn-light rounded-circle shadow-sm btn-step" data-action="dec" data-target="age">
+                                    <i class="bi bi-dash"></i>
+                                </button>
+                                <input type="range" id="age" class="form-range flex-grow-1 mx-2" min="1" max="100" step="1" value="18">
+                                <button type="button" class="btn btn-light rounded-circle shadow-sm btn-step" data-action="inc" data-target="age">
+                                    <i class="bi bi-plus"></i>
+                                </button>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Giới tính</label>
