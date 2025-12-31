@@ -82,6 +82,15 @@ const dayMap = {
     0: 6  // Sunday
 };
 
+// Real-time Slider Value Updates
+['weight', 'height', 'age'].forEach(id => {
+    const slider = document.getElementById(id);
+    const display = document.getElementById(id + '-val');
+    slider.addEventListener('input', () => {
+        display.innerText = slider.value;
+    });
+});
+
 document.getElementById('calculator-form').addEventListener('submit', function(e) {
     e.preventDefault();
 

@@ -215,3 +215,36 @@ body {
 .bmi-warning { color: #f39c12 !important; }
 .bmi-danger { color: #e74c3c !important; }
 
+/* Custom Range Slider */
+.form-range::-webkit-slider-runnable-track {
+    background: #e0e0e0;
+    height: 6px;
+    border-radius: 3px;
+}
+
+.form-range::-webkit-slider-thumb {
+    background: #667eea;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 6px rgba(102, 126, 234, 0.4);
+    margin-top: -6px; /* Center thumb on track */
+    width: 18px;
+    height: 18px;
+}
+
+.form-range:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+}
+
+.form-range::-moz-range-track {
+    background: #e0e0e0;
+    height: 6px;
+    border-radius: 3px;
+}
+
+.form-range::-moz-range-thumb {
+    background: #667eea;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 6px rgba(102, 126, 234, 0.4);
+    width: 18px;
+    height: 18px;
+}
