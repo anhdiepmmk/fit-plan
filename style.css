@@ -281,3 +281,12 @@ body {
     background: rgba(200, 200, 200, 0.3);
 }
 
+/* Highlight for current meal based on time */
+.current-meal-highlight {
+    background: linear-gradient(to right, rgba(102, 126, 234, 0.1), transparent);
+    border-left: 4px solid #667eea;
+    padding-left: 12px;
+    border-radius: 0 4px 4px 0;
+}
+
+

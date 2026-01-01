@@ -181,6 +181,13 @@ function renderMealPlan() {
     container.innerHTML = '';
 
     const todayIndex = dayMap[moment().day()];
+    
+    // Determine current meal type based on time
+    const hour = moment().hour();
+    let currentMealType = "";
+    if (hour < 10) currentMealType = "Sáng";
+    else if (hour < 14) currentMealType = "Trưa";
+    else currentMealType = "Tối";
 
     currentWeeklyPlan.forEach((dayData, index) => {
         const isToday = index === todayIndex;
@@ -190,8 +197,11 @@ function renderMealPlan() {
 
         let mealsHtml = '';
         dayData.meals.forEach(meal => {
+            const isCurrentMeal = isToday && meal.type === currentMealType;
+            const highlightClass = isCurrentMeal ? 'current-meal-highlight' : '';
+            
             mealsHtml += `
-            <div class="meal-item">
+            <div class="meal-item ${highlightClass}">
                 <span class="badge bg-light text-dark mb-1">${meal.type}</span>
                 <span class="meal-item-title">${meal.name}</span>
                 <span class="meal-item-desc">${meal.desc}</span>
