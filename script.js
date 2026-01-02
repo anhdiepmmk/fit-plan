@@ -90,7 +90,10 @@ const dayMap = {
 
 document.getElementById('calculator-form').addEventListener('submit', function(e) {
     e.preventDefault();
+    calculatePlan(true); // User triggered, so scroll
+});
 
+function calculatePlan(shouldScroll = true) {
     const weight = parseFloat(document.getElementById('weight').value);
     const height = parseFloat(document.getElementById('height').value);
     const age = parseInt(document.getElementById('age').value);
@@ -98,7 +101,7 @@ document.getElementById('calculator-form').addEventListener('submit', function(e
     const activity = parseFloat(document.getElementById('activity').value);
     const goal = document.getElementById('goal').value;
 
-// 1. Calculate BMR (Mifflin-St Jeor Formula)
+    // 1. Calculate BMR (Mifflin-St Jeor Formula)
     let bmr;
     if (gender === 'male') {
         bmr = 10 * weight + 6.25 * height - 5 * age + 5;
@@ -132,7 +135,10 @@ document.getElementById('calculator-form').addEventListener('submit', function(e
 
     // 5. Update UI
     currentWeeklyPlan = generateWeeklyPlan(gender, goal);
-    displayResults(bmi, bmiStatus, bmr, tdee, target);
+    displayResults(bmi, bmiStatus, bmr, tdee, target, shouldScroll);
+    
+    // Save data for next time
+    saveUserData();
 
     // 6. Send Event to Google Analytics
     if (typeof gtag === 'function') {
@@ -142,10 +148,10 @@ document.getElementById('calculator-form').addEventListener('submit', function(e
             'value': 1
         });
     }
-});
+}
 
 
-function displayResults(bmi, bmiStatus, bmr, tdee, target) {
+function displayResults(bmi, bmiStatus, bmr, tdee, target, shouldScroll = true) {
     const bmiValEl = document.getElementById('bmi-val');
     const bmiStatusEl = document.getElementById('bmi-status');
 
@@ -177,6 +183,14 @@ function displayResults(bmi, bmiStatus, bmr, tdee, target) {
     document.getElementById('results-section').classList.remove('d-none');
 
     renderMealPlan();
+
+    // Auto-scroll to today
+    if (shouldScroll) {
+        const todayCard = document.querySelector('.today');
+        if (todayCard) {
+            todayCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    }
 }
 
 function renderMealPlan() {
@@ -224,3 +238,58 @@ function renderMealPlan() {
     });
 }
 
+// Save user data to localStorage
+function saveUserData() {
+    const data = {
+        weight: document.getElementById('weight').value,
+        height: document.getElementById('height').value,
+        age: document.getElementById('age').value,
+        gender: document.querySelector('input[name="gender"]:checked').value,
+        activity: document.getElementById('activity').value,
+        goal: document.getElementById('goal').value
+    };
+    localStorage.setItem('fitplan_user_data', JSON.stringify(data));
+}
+
+// Load user data from localStorage and auto-calculate
+function loadUserData() {
+    const savedData = localStorage.getItem('fitplan_user_data');
+    if (!savedData) return;
+
+    try {
+        const data = JSON.parse(savedData);
+        
+        // Restore values
+        if (data.weight) document.getElementById('weight').value = data.weight;
+        if (data.height) document.getElementById('height').value = data.height;
+        if (data.age) document.getElementById('age').value = data.age;
+        
+        if (data.gender) {
+            const genderInput = document.querySelector(`input[name="gender"][value="${data.gender}"]`);
+            if (genderInput) genderInput.checked = true;
+        }
+        
+        if (data.activity) document.getElementById('activity').value = data.activity;
+        if (data.goal) document.getElementById('goal').value = data.goal;
+
+        // Update slider displays
+        ['weight', 'height', 'age'].forEach(id => {
+            const slider = document.getElementById(id);
+            const display = document.getElementById(id + '-val');
+            display.innerText = slider.value;
+            // Trigger input event to update steppers state
+            slider.dispatchEvent(new Event('input')); 
+        });
+
+        // Auto calculate
+        calculatePlan(false); // Do not scroll when auto-loading
+
+    } catch (e) {
+        console.error("Error loading user data:", e);
+    }
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    loadUserData();
+});
