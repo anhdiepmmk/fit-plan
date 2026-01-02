@@ -152,7 +152,8 @@ body {
     display: inline-block;
 }
 
-.stat-box > span:first-child:hover .custom-tooltip {
+.stat-box > span:first-child:hover .custom-tooltip,
+.tooltip-trigger:hover .custom-tooltip {
     visibility: visible;
     opacity: 1;
     transform: translateX(-50%) translateY(-10px);
