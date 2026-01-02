@@ -4,14 +4,14 @@
 
 let currentWeeklyPlan = [];
 
-function generateWeeklyPlan(gender = 'female') {
+function generateWeeklyPlan(gender = 'female', goal = 'maintain') {
     const days = ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ Nhật"];
     const plan = [];
 
     // Simple shuffle helper
     const shuffle = (array) => [...array].sort(() => Math.random() - 0.5);
 
-    const pools = getFoodData(gender);
+    const pools = getFoodData(gender, goal);
     let morningChoices = shuffle(pools.morning);
     let lunchChoices = shuffle(pools.lunch);
     let dinnerChoices = shuffle(pools.evening);
@@ -114,6 +114,9 @@ document.getElementById('calculator-form').addEventListener('submit', function(e
     if (goal === 'lose-slow') target -= 250;
     else if (goal === 'lose-medium') target -= 500;
     else if (goal === 'lose-fast') target -= 1000;
+    else if (goal === 'gain-slow') target += 250;
+    else if (goal === 'gain-medium') target += 500;
+    else if (goal === 'gain-fast') target += 1000;
 
     // Minimum safety calories
     const minCal = (gender === 'male' ? 1500 : 1200);
@@ -128,7 +131,7 @@ document.getElementById('calculator-form').addEventListener('submit', function(e
     else bmiStatus = "Béo phì";
 
     // 5. Update UI
-    currentWeeklyPlan = generateWeeklyPlan(gender);
+    currentWeeklyPlan = generateWeeklyPlan(gender, goal);
     displayResults(bmi, bmiStatus, bmr, tdee, target);
 
     // 6. Send Event to Google Analytics
