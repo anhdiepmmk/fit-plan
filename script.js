@@ -228,6 +228,9 @@ function renderMealPlan() {
         cardCol.innerHTML = `
             <div class="glass-card meal-card p-3 position-relative ${isToday ? 'today' : ''}">
                 ${isToday ? '<span class="today-badge">Hôm nay</span>' : ''}
+                <button class="btn-save-card" onclick="saveCardAsImage(this.closest('.meal-card'), '${dayData.day}')" title="Lưu ảnh thực đơn">
+                    <i class="bi bi-download"></i>
+                </button>
                 <h5 class="fw-bold mb-3 ${isToday ? 'text-primary' : ''}">${dayData.day}</h5>
                 <div class="meal-list">
                     ${mealsHtml}
@@ -293,3 +296,27 @@ function loadUserData() {
 document.addEventListener('DOMContentLoaded', () => {
     loadUserData();
 });
+
+function saveCardAsImage(cardElement, dayName) {
+    // Hide the save button temporarily for the screenshot
+    const btn = cardElement.querySelector('.btn-save-card');
+    if (btn) btn.style.display = 'none';
+
+    html2canvas(cardElement, {
+        backgroundColor: '#ffffff', // White background
+        scale: 2 // Higher resolution
+    }).then(canvas => {
+        // Restore button
+        if (btn) btn.style.display = 'flex';
+
+        // Trigger download
+        const link = document.createElement('a');
+        link.download = `thuc-don-${dayName}.jpg`;
+        link.href = canvas.toDataURL("image/jpeg", 1.0);
+        link.click();
+    }).catch(err => {
+        console.error("Error generating image:", err);
+        if (btn) btn.style.display = 'flex';
+        alert("Đã có lỗi xảy ra khi lưu ảnh. Vui lòng thử lại.");
+    });
+}

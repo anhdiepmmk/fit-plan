@@ -291,3 +291,40 @@ body {
 }
 
 
+
+/* Save Card Button */
+.btn-save-card {
+    position: absolute;
+    top: 10px;
+    right: 15px; /* Adjusted to not overlap with today badge if present, but today badge is top -10px, this is inside relative container */
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    color: #667eea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.meal-card.today .btn-save-card {
+    top: 40px; /* Push down if it's "Today" card to avoid badge overlap, or just rely on z-index */
+}
+
+/* On hover of the card, show the button */
+.meal-card:hover .btn-save-card {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.btn-save-card:hover {
+    background: var(--primary-gradient);
+    color: white;
+    transform: scale(1.1);
+}
