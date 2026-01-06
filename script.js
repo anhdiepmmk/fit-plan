@@ -319,16 +319,15 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function saveCardAsImage(cardElement, dayName) {
-    // Hide the save button temporarily for the screenshot
-    const btn = cardElement.querySelector('.btn-save-card');
-    if (btn) btn.style.display = 'none';
+    // Add capturing class to hide elements and reset styles
+    cardElement.classList.add('is-capturing');
 
     html2canvas(cardElement, {
         backgroundColor: '#ffffff', // White background
         scale: 2 // Higher resolution
     }).then(canvas => {
-        // Restore button
-        if (btn) btn.style.display = 'flex';
+        // Remove capturing class
+        cardElement.classList.remove('is-capturing');
 
         // Trigger download
         const link = document.createElement('a');
@@ -337,7 +336,36 @@ function saveCardAsImage(cardElement, dayName) {
         link.click();
     }).catch(err => {
         console.error("Error generating image:", err);
-        if (btn) btn.style.display = 'flex';
+        cardElement.classList.remove('is-capturing');
         alert("Đã có lỗi xảy ra khi lưu ảnh. Vui lòng thử lại.");
+    });
+}
+function saveWeeklyPlanAsImage() {
+    const container = document.getElementById('results-section');
+    if (!container) return;
+
+    // Add capturing class to hide elements
+    container.classList.add('is-capturing');
+
+    // Use html2canvas to capture the results section
+    html2canvas(container, {
+        backgroundColor: '#f0f2f5', // Match body background
+        scale: 2, // High resolution
+        useCORS: true,
+        logging: false,
+        windowWidth: 1200 // Ensure consistent layout for capture
+    }).then(canvas => {
+        // Remove capturing class
+        container.classList.remove('is-capturing');
+
+        // Trigger download
+        const link = document.createElement('a');
+        link.download = `thuc-don-tuan-fitplan.jpg`;
+        link.href = canvas.toDataURL("image/jpeg", 0.9);
+        link.click();
+    }).catch(err => {
+        console.error("Error generating weekly image:", err);
+        container.classList.remove('is-capturing');
+        alert("Đã có lỗi xảy ra khi lưu ảnh tuần. Vui lòng thử lại.");
     });
 }

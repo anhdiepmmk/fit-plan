@@ -257,7 +257,12 @@
                         </div>
                     </div>
 
-                    <h2 class="h4 mb-3 px-2">Thực đơn gợi ý cho 1 tuần</h2>
+                    <div class="d-flex justify-content-between align-items-center mb-3 px-2">
+                        <h2 class="h4 mb-0">Thực đơn gợi ý cho 1 tuần</h2>
+                        <button id="btn-save-weekly" class="btn btn-outline-primary btn-sm rounded-pill px-3 shadow-sm" onclick="saveWeeklyPlanAsImage()">
+                            <i class="bi bi-download me-1"></i> Lưu trọn bộ 7 ngày
+                        </button>
+                    </div>
                     <div id="meal-plan-container" class="row g-3">
                         <!-- Meal cards will be injected here -->
                     </div>

@@ -364,3 +364,44 @@ body {
     color: white;
     transform: scale(1.1);
 }
+#btn-save-weekly {
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+#btn-save-weekly:hover {
+    background: var(--primary-gradient);
+    border-color: transparent;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+/* Capturing mode to clean up image */
+.is-capturing .meal-card,
+.meal-card.is-capturing {
+    transform: none !important;
+    box-shadow: none !important;
+    border: 1px solid var(--glass-border) !important;
+}
+
+.is-capturing .today-badge,
+.is-capturing .btn-save-card,
+.is-capturing #btn-save-weekly,
+.meal-card.is-capturing .today-badge,
+.meal-card.is-capturing .btn-save-card {
+    display: none !important;
+}
+
+.is-capturing .current-meal-highlight,
+.meal-card.is-capturing .current-meal-highlight {
+    background: transparent !important;
+    border-left: none !important;
+    padding-left: 0 !important;
+}
+
+.is-capturing .meal-card.today h5,
+.meal-card.is-capturing.today h5 {
+    color: #2d3436 !important; /* Reset today's color in capture */
+}
