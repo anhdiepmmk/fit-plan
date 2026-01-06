@@ -196,7 +196,7 @@
                         <h2 class="h4 mb-4">Chỉ số của bạn</h2>
                         <div class="row text-center">
                             <div class="col-md-3 mb-3 mb-md-0">
-                                <div class="stat-box">
+                                <div class="stat-box bmi">
                                     <span class="d-block text-muted small">
                                         BMI <i class="bi bi-question-circle help-icon"></i>
                                         <div class="custom-tooltip">
@@ -213,7 +213,7 @@
                                 </div>
                             </div>
                             <div class="col-md-3 mb-3 mb-md-0">
-                                <div class="stat-box">
+                                <div class="stat-box bmr">
                                     <span class="d-block text-muted small">
                                         BMR <i class="bi bi-question-circle help-icon"></i>
                                         <div class="custom-tooltip">
@@ -225,7 +225,7 @@
                                 </div>
                             </div>
                             <div class="col-md-3 mb-3 mb-md-0">
-                                <div class="stat-box">
+                                <div class="stat-box tdee">
                                     <span class="d-block text-muted small">
                                         TDEE <i class="bi bi-question-circle help-icon"></i>
                                         <div class="custom-tooltip">
@@ -239,15 +239,19 @@
                             <div class="col-md-3">
                                 <div class="stat-box target">
                                     <span class="d-block text-muted small">
-                                        Mục tiêu <i class="bi bi-question-circle help-icon"></i>
-                                        <div class="custom-tooltip">
-                                            <strong>Mục tiêu calo hàng ngày:</strong><br>
-                                            Lượng calo bạn nên nạp vào để đạt mục tiêu (giảm cân hoặc duy trì).<br>
-                                            Thường là TDEE trừ đi một lượng thâm hụt (ví dụ: -500 kcal).
-                                        </div>
-                                    </span>
-                                    <span id="target-calories" class="h3 fw-bold text-success">--</span>
-                                    <span class="d-block small">Kcal / Ngày</span>
+                                         Mục tiêu <i class="bi bi-question-circle help-icon"></i>
+                                         <div class="custom-tooltip">
+                                             <strong>Mục tiêu calo hàng ngày:</strong><br>
+                                             Lượng calo bạn nên nạp vào để đạt mục tiêu (giảm cân hoặc duy trì).<br>
+                                             Thường là TDEE cộng thêm hoặc trừ đi một lượng calo (ví dụ: -500 kcal).
+                                         </div>
+                                     </span>
+                                     <div class="target-delta-wrap my-1">
+                                         <span id="target-delta-val" class="h3 fw-bold">--</span>
+                                     </div>
+                                     <div class="text-muted small">
+                                         <span id="target-calories" class="fw-semibold">--</span> Kcal / Ngày
+                                     </div>
                                 </div>
                             </div>
                         </div>

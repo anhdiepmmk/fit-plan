@@ -159,9 +159,45 @@ body {
     transform: translateX(-50%) translateY(-10px);
 }
 
+.stat-box.bmi {
+    background: linear-gradient(135deg, rgba(231, 76, 60, 0.05) 0%, rgba(243, 156, 18, 0.05) 100%);
+    border-color: rgba(231, 76, 60, 0.15);
+}
+
+.stat-box.bmr {
+    background: linear-gradient(135deg, rgba(0, 219, 222, 0.05) 0%, rgba(0, 188, 212, 0.05) 100%);
+    border-color: rgba(0, 188, 212, 0.15);
+}
+
+.stat-box.tdee {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    border-color: rgba(102, 126, 234, 0.15);
+}
+
 .stat-box.target {
-    background: linear-gradient(135deg, rgba(168, 224, 99, 0.1) 0%, rgba(86, 171, 47, 0.1) 100%);
-    border-color: rgba(86, 171, 47, 0.2);
+    background: linear-gradient(135deg, rgba(46, 204, 113, 0.1) 0%, rgba(39, 174, 96, 0.1) 100%);
+    border-color: rgba(46, 204, 113, 0.25);
+}
+
+.target-delta-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+}
+
+#target-delta-val {
+    letter-spacing: -1px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    white-space: nowrap;
+}
+
+#target-calories {
+    display: inline-flex;
+    align-items: center;
 }
 
 /* Meal Plan Grid */

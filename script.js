@@ -176,7 +176,28 @@ function displayResults(bmi, bmiStatus, bmr, tdee, target, shouldScroll = true) 
 
     document.getElementById('bmr-val').innerText = Math.round(bmr);
     document.getElementById('tdee-val').innerText = Math.round(tdee);
-    document.getElementById('target-calories').innerText = Math.round(target);
+    
+    const targetCalEl = document.getElementById('target-calories');
+    const targetDeltaValEl = document.getElementById('target-delta-val');
+
+    const delta = Math.round(target - tdee);
+    targetCalEl.innerText = Math.round(target);
+
+    // Reset classes
+    targetDeltaValEl.classList.remove('text-success', 'text-danger', 'text-primary');
+
+    if (delta > 0) {
+        targetDeltaValEl.innerText = `+ ${delta}`;
+        targetDeltaValEl.classList.add('text-success');
+    } else if (delta < 0) {
+        targetDeltaValEl.innerText = `- ${Math.abs(delta)}`;
+        targetDeltaValEl.classList.add('text-danger');
+    } else {
+        targetDeltaValEl.innerText = "0";
+        targetDeltaValEl.classList.add('text-primary');
+    }
+
+    targetCalEl.innerHTML = `<span class="me-1">=</span> ${Math.round(target)}`;
 
     // Show results section, hide empty state
     document.getElementById('empty-state').classList.add('d-none');
