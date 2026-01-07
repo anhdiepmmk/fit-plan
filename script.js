@@ -133,9 +133,12 @@ function calculatePlan(shouldScroll = true) {
     else if (bmi < 29.9) bmiStatus = "Tiền béo phì";
     else bmiStatus = "Béo phì";
 
-    // 5. Update UI
+    // 5. Calculate Water Intake
+    const waterIntake = calculateWaterIntake(weight, age, activity);
+
+    // 6. Update UI
     currentWeeklyPlan = generateWeeklyPlan(gender, goal);
-    displayResults(bmi, bmiStatus, bmr, tdee, target, shouldScroll);
+    displayResults(bmi, bmiStatus, bmr, tdee, target, waterIntake, shouldScroll);
     
     // Save data for next time
     saveUserData();
@@ -151,7 +154,38 @@ function calculatePlan(shouldScroll = true) {
 }
 
 
-function displayResults(bmi, bmiStatus, bmr, tdee, target, shouldScroll = true) {
+function calculateWaterIntake(weight, age, activity) {
+    // Basic requirement based on age (mL per kg)
+    let baseLitersPerKg;
+    if (age < 30) {
+        baseLitersPerKg = 40;
+    } else if (age <= 55) {
+        baseLitersPerKg = 35;
+    } else {
+        baseLitersPerKg = 30;
+    }
+
+    let waterML = weight * baseLitersPerKg;
+
+    // Adjust for activity level (Physical Activity Level)
+    // 1.2: sedentary, 1.375: light, 1.55: moderate, 1.725: active, 1.9: very active
+    if (activity <= 1.2) {
+        // No extra
+    } else if (activity <= 1.375) {
+        waterML += 350;
+    } else if (activity <= 1.55) {
+        waterML += 700;
+    } else if (activity <= 1.725) {
+        waterML += 1000;
+    } else {
+        waterML += 1300;
+    }
+
+    return waterML / 1000; // Convert to Liters
+}
+
+
+function displayResults(bmi, bmiStatus, bmr, tdee, target, waterIntake, shouldScroll = true) {
     const bmiValEl = document.getElementById('bmi-val');
     const bmiStatusEl = document.getElementById('bmi-status');
 
@@ -176,6 +210,7 @@ function displayResults(bmi, bmiStatus, bmr, tdee, target, shouldScroll = true) 
 
     document.getElementById('bmr-val').innerText = Math.round(bmr);
     document.getElementById('tdee-val').innerText = Math.round(tdee);
+    document.getElementById('water-val').innerText = waterIntake.toFixed(1);
     
     const targetCalEl = document.getElementById('target-calories');
     const targetDeltaValEl = document.getElementById('target-delta-val');

@@ -194,8 +194,8 @@
                 <div id="results-section" class="d-none">
                     <div class="glass-card p-4 mb-4">
                         <h2 class="h4 mb-4">Chỉ số của bạn</h2>
-                        <div class="row text-center">
-                            <div class="col-md-3 mb-3 mb-md-0">
+                        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-2 g-md-3 text-center">
+                            <div class="col">
                                 <div class="stat-box bmi">
                                     <span class="d-block text-muted small">
                                         BMI <i class="bi bi-question-circle help-icon"></i>
@@ -212,7 +212,7 @@
                                     <span id="bmi-status" class="d-block small">--</span>
                                 </div>
                             </div>
-                            <div class="col-md-3 mb-3 mb-md-0">
+                            <div class="col">
                                 <div class="stat-box bmr">
                                     <span class="d-block text-muted small">
                                         BMR <i class="bi bi-question-circle help-icon"></i>
@@ -224,7 +224,7 @@
                                     <span id="bmr-val" class="h3 fw-bold text-info">--</span>
                                 </div>
                             </div>
-                            <div class="col-md-3 mb-3 mb-md-0">
+                            <div class="col">
                                 <div class="stat-box tdee">
                                     <span class="d-block text-muted small">
                                         TDEE <i class="bi bi-question-circle help-icon"></i>
@@ -236,7 +236,20 @@
                                     <span id="tdee-val" class="h3 fw-bold text-primary">--</span>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col">
+                                <div class="stat-box water">
+                                    <span class="d-block text-muted small">
+                                        Nước <i class="bi bi-question-circle help-icon"></i>
+                                        <div class="custom-tooltip">
+                                            <strong>Lượng nước khuyến nghị:</strong><br>
+                                            Tính toán dựa trên cân nặng, độ tuổi và mức độ vận động hàng ngày để bù đắp lượng nước mất đi.
+                                        </div>
+                                    </span>
+                                    <span id="water-val" class="h3 fw-bold text-info">--</span>
+                                    <span class="d-block small">Lít / Ngày</span>
+                                </div>
+                            </div>
+                            <div class="col">
                                 <div class="stat-box target">
                                     <span class="d-block text-muted small">
                                          Mục tiêu <i class="bi bi-question-circle help-icon"></i>

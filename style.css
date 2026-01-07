@@ -93,7 +93,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-height: 140px;
+    min-height: 120px;
     position: relative;
 }
 
@@ -177,6 +177,10 @@ body {
 .stat-box.target {
     background: linear-gradient(135deg, rgba(46, 204, 113, 0.1) 0%, rgba(39, 174, 96, 0.1) 100%);
     border-color: rgba(46, 204, 113, 0.25);
+}
+.stat-box.water {
+    background: linear-gradient(135deg, rgba(0, 219, 222, 0.1) 0%, rgba(102, 126, 234, 0.1) 100%);
+    border-color: rgba(0, 219, 222, 0.25);
 }
 
 .target-delta-wrap {
