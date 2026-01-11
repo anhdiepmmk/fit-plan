@@ -4,22 +4,23 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    position: relative; /* For absolute positioning of result */
 }
 
 .bmi-gauge {
     width: 100%;
-    max-width: 300px;
+    max-width: 400px; /* Increased for wider viewBox */
     height: auto;
 }
 
 .gauge-segment {
     fill: none;
-    stroke-width: 12;
-    stroke-linecap: round;
+    stroke-width: 40; /* Much thicker */
+    stroke-linecap: but; /* Clean ends for segments */
 }
 
 .gauge-segment.underweight {
-    stroke: #3498db;
+    stroke: #8b0000; /* Dark Red */
 }
 
 .gauge-segment.normal {
@@ -27,49 +28,78 @@
 }
 
 .gauge-segment.overweight {
-    stroke: #f39c12;
+    stroke: #f1c40f; /* Yellow */
 }
 
 .gauge-segment.obesity {
-    stroke: #e74c3c;
+    stroke: #e74c3c; /* Red */
 }
 
 .gauge-label {
-    font-size: 8px;
-    fill: #636e72;
+    font-size: 10px;
+    font-weight: 600;
+    fill: #2d3436;
     text-anchor: middle;
 }
 
-.gauge-needle {
+.gauge-label.start {
+    text-anchor: start;
+    transform: translate(5px, 0);
+}
+
+.gauge-label.end {
+    text-anchor: end;
+    transform: translate(-5px, 0);
+}
+
+/* Needle Group */
+#bmi-needle-group {
+    transition: transform 0.5s ease-out; /* 300-600ms ease-out */
+    transform-origin: 0 0; /* Rotate around its own 0,0 which is translated to center */
+}
+
+.needle-line {
     stroke: #2d3436;
     stroke-width: 3;
     stroke-linecap: round;
-    transform-origin: 100px 100px;
-    transition: transform 1s ease-in-out;
+}
+
+.needle-head {
+    fill: #2d3436;
+}
+
+.needle-pivot {
+    fill: #2d3436;
 }
 
 /* BMI Result Display */
+.bmi-result {
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
 .bmi-value {
-    font-size: 3rem;
+    font-size: 2rem; /* Adjusted for inside gauge */
     font-weight: 700;
     color: #2d3436;
     line-height: 1;
 }
 
 .bmi-unit {
-    font-size: 1rem;
-    font-weight: 400;
-    color: #636e72;
-    margin-left: 4px;
+    display: none; /* Hide unit to match "BMI = 20.1" format */
 }
 
 .bmi-category {
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: 600;
-    margin-top: 8px;
-    padding: 4px 16px;
+    margin-top: 4px;
+    padding: 2px 12px;
     border-radius: 20px;
     display: inline-block;
+    /* Optional: Hide category here if only value is requested at center? 
+       Req says "Hiển thị giá trị BMI số", doesn't explicitly exclude category. 
+       But usually category is shown below. I'll keep it but smaller. */
 }
 
 .bmi-category.underweight {
@@ -112,5 +142,21 @@
     display: block;
     font-size: 1rem;
     font-weight: 600;
+    font-weight: 600;
     color: #2d3436;
+}
+
+.category-label {
+    font-size: 12px;
+    font-weight: 600;
+    pointer-events: none;
+    letter-spacing: 0.5px;
+}
+
+.category-label.text-white {
+    fill: #ffffff;
+}
+
+.category-label.text-dark {
+    fill: #2d3436;
 }

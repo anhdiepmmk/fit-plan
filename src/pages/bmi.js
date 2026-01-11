@@ -4,7 +4,7 @@ import './bmi.css'
 
 // BMI Calculator Logic
 const form = document.getElementById('bmi-form');
-const needle = document.getElementById('bmi-needle');
+const needle = document.getElementById('bmi-needle-group');
 const bmiValueEl = document.getElementById('bmi-value');
 const bmiCategoryEl = document.getElementById('bmi-category');
 const bmiDetailsEl = document.getElementById('bmi-details');
@@ -23,8 +23,8 @@ function bmiToAngle(bmi) {
     const minBMI = 15;
     const maxBMI = 40;
     const clampedBMI = Math.max(minBMI, Math.min(maxBMI, bmi));
-    // Map BMI 15-40 to angle -90 to 90 degrees
-    const angle = ((clampedBMI - minBMI) / (maxBMI - minBMI)) * 180 - 90;
+    // Map BMI 15-40 to angle -180 to 0 degrees
+    const angle = ((clampedBMI - minBMI) / (maxBMI - minBMI)) * 180 - 180;
     return angle;
 }
 
@@ -66,12 +66,12 @@ function calculateMetrics(weight, heightCm, bmi) {
 // Update gauge needle with animation
 function updateNeedle(bmi) {
     const angle = bmiToAngle(bmi);
-    needle.style.transform = `rotate(${angle}deg)`;
+    needle.style.transform = `translate(150px, 150px) rotate(${angle}deg)`;
 }
 
 // Reset needle to initial position
 function resetNeedle() {
-    needle.style.transform = 'rotate(-90deg)';
+    needle.style.transform = 'translate(150px, 150px) rotate(-180deg)';
 }
 
 // Form validation

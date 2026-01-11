@@ -84,33 +84,73 @@
                         <!-- Gauge Display -->
                         <div class="col-md-7">
                             <div class="bmi-gauge-container">
-                                <svg id="bmi-gauge" viewBox="0 0 200 120" class="bmi-gauge">
-                                    <!-- Background arc segments -->
-                                    <path class="gauge-segment underweight" d="M 20 100 A 80 80 0 0 1 56.9 36.9" />
-                                    <path class="gauge-segment normal" d="M 56.9 36.9 A 80 80 0 0 1 100 20" />
-                                    <path class="gauge-segment normal" d="M 100 20 A 80 80 0 0 1 143.1 36.9" />
-                                    <path class="gauge-segment overweight" d="M 143.1 36.9 A 80 80 0 0 1 167 64" />
-                                    <path class="gauge-segment obesity" d="M 167 64 A 80 80 0 0 1 180 100" />
+                                <svg id="bmi-gauge" viewBox="-30 0 360 180" class="bmi-gauge">
+                                    <!-- Background arc segments (Calculated for Radius 100, Stroke 40) center 150,150 -->
+                                    <!-- Added 1 degree overlap to prevent gaps -->
+                                    
+                                    <!-- Underweight: 15 - 18.5 (14% -> 25.2 deg) -->
+                                    <!-- Angle: -180 to -154.8 -->
+                                    <!-- Overlap End: -153.8 (+1 deg) -->
+                                    <path class="gauge-segment underweight" d="M 50 150 A 100 100 0 0 1 55.4 105.9" />
+                                    
+                                    <!-- Normal: 18.5 - 25 (26% -> 46.8 deg) -->
+                                    <!-- Angle: -154.8 to -108 -->
+                                    <!-- Overlap Start: -155.8 (-1 deg), Overlap End: -107 (+1 deg) -->
+                                    <path class="gauge-segment normal" d="M 54.4 107.6 A 100 100 0 0 1 120.8 54.4" />
+                                    
+                                    <!-- Overweight: 25 - 30 (20% -> 36 deg) -->
+                                    <!-- Angle: -108 to -72 -->
+                                    <!-- Overlap Start: -109 (-1 deg), Overlap End: -71 (+1 deg) -->
+                                    <path class="gauge-segment overweight" d="M 119.1 54.9 A 100 100 0 0 1 182.6 55.4" />
+                                    
+                                    <!-- Obesity: 30 - 40 (40% -> 72 deg) -->
+                                    <!-- Angle: -72 to 0 -->
+                                    <!-- Overlap Start: -73 (-1 deg) -->
+                                    <path class="gauge-segment obesity" d="M 180.9 54.1 A 100 100 0 0 1 250 150" />
                                     
                                     <!-- Labels -->
-                                    <text x="25" y="95" class="gauge-label">15</text>
-                                    <text x="45" y="45" class="gauge-label">18.5</text>
-                                    <text x="97" y="25" class="gauge-label">22</text>
-                                    <text x="145" y="45" class="gauge-label">25</text>
-                                    <text x="168" y="75" class="gauge-label">30</text>
-                                    <text x="175" y="95" class="gauge-label">40</text>
+                                    <text x="50" y="145" class="gauge-label start">15</text>
+                                    <text x="45" y="100" class="gauge-label">18.5</text>
+                                    <text x="115" y="45" class="gauge-label">25</text>
+                                    <text x="185" y="45" class="gauge-label">30</text>
+                                    <text x="250" y="100" class="gauge-label">35</text>
+                                    <text x="255" y="145" class="gauge-label end">40</text>
+
+                                    <!-- Category Labels (On the arc) -->
+                                    <defs>
+                                        <!-- Path for text to follow. Radius 132 (120 outer edge + 12 padding) -->
+                                        <path id="text-curve" d="M 18 150 A 132 132 0 0 1 282 150" fill="none"/>
+                                    </defs>
+
+                                    <!-- Category Labels (On the arc) -->
+                                    <text class="category-label text-dark" dy="-5">
+                                        <textPath href="#text-curve" startOffset="7%" text-anchor="middle">Underweight</textPath>
+                                    </text>
+                                    <text class="category-label text-dark" dy="-5">
+                                        <textPath href="#text-curve" startOffset="27%" text-anchor="middle">Normal</textPath>
+                                    </text>
+                                    <text class="category-label text-dark fw-bold" dy="-5">
+                                        <textPath href="#text-curve" startOffset="50%" text-anchor="middle">Overweight</textPath>
+                                    </text>
+                                    <text class="category-label text-dark" dy="-5">
+                                        <textPath href="#text-curve" startOffset="80%" text-anchor="middle">Obesity</textPath>
+                                    </text>
                                     
-                                    <!-- Center circle -->
-                                    <circle cx="100" cy="100" r="8" fill="white" stroke="#667eea" stroke-width="2"/>
-                                    
-                                    <!-- Needle -->
-                                    <line id="bmi-needle" x1="100" y1="100" x2="100" y2="30" class="gauge-needle" />
+                                    <!-- Needle Group -->
+                                    <g id="bmi-needle-group" transform="translate(150, 150) rotate(-180)">
+                                        <!-- Needle Line -->
+                                        <line x1="0" y1="0" x2="110" y2="0" class="needle-line" />
+                                        <!-- Arrow Head -->
+                                        <path d="M 110 0 L 100 -5 L 100 5 Z" class="needle-head" />
+                                        <!-- Center Pivot -->
+                                        <circle cx="0" cy="0" r="6" class="needle-pivot" />
+                                    </g>
                                 </svg>
                                 
                                 <!-- BMI Value Display -->
                                 <div class="bmi-result text-center mt-3">
                                     <div class="bmi-value">
-                                        <span id="bmi-value">--</span>
+                                        BMI = <span id="bmi-value">--</span>
                                         <span class="bmi-unit">kg/m²</span>
                                     </div>
                                     <div id="bmi-category" class="bmi-category">--</div>
