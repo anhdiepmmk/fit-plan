@@ -37,20 +37,13 @@
 
 .gauge-label {
     font-size: 10px;
-    font-weight: 600;
+    font-weight: 700;
     fill: #2d3436;
-    text-anchor: middle;
+    dominant-baseline: middle; /* Center vertically on the path */
+    pointer-events: none;
 }
 
-.gauge-label.start {
-    text-anchor: start;
-    transform: translate(5px, 0);
-}
 
-.gauge-label.end {
-    text-anchor: end;
-    transform: translate(-5px, 0);
-}
 
 /* Needle Group */
 #bmi-needle-group {

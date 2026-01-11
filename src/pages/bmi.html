@@ -108,19 +108,33 @@
                                     <!-- Overlap Start: -73 (-1 deg) -->
                                     <path class="gauge-segment obesity" d="M 180.9 54.1 A 100 100 0 0 1 250 150" />
                                     
-                                    <!-- Labels -->
-                                    <text x="50" y="145" class="gauge-label start">15</text>
-                                    <text x="45" y="100" class="gauge-label">18.5</text>
-                                    <text x="115" y="45" class="gauge-label">25</text>
-                                    <text x="185" y="45" class="gauge-label">30</text>
-                                    <text x="250" y="100" class="gauge-label">35</text>
-                                    <text x="255" y="145" class="gauge-label end">40</text>
-
-                                    <!-- Category Labels (On the arc) -->
                                     <defs>
                                         <!-- Path for text to follow. Radius 132 (120 outer edge + 12 padding) -->
                                         <path id="text-curve" d="M 18 150 A 132 132 0 0 1 282 150" fill="none"/>
+                                        <!-- Path for numbers (Radius 100 - center of gauge) -->
+                                        <path id="numbers-curve" d="M 50 150 A 100 100 0 0 1 250 150" fill="none"/>
                                     </defs>
+
+                                    <!-- Labels -->
+                                    <text class="gauge-label start">
+                                        <textPath href="#numbers-curve" startOffset="1%" text-anchor="start">15</textPath>
+                                    </text>
+                                    <text class="gauge-label">
+                                        <textPath href="#numbers-curve" startOffset="14%" text-anchor="middle">18.5</textPath>
+                                    </text>
+                                    <text class="gauge-label">
+                                        <textPath href="#numbers-curve" startOffset="40%" text-anchor="middle">25</textPath>
+                                    </text>
+                                    <text class="gauge-label">
+                                        <textPath href="#numbers-curve" startOffset="60%" text-anchor="middle">30</textPath>
+                                    </text>
+                                    <text class="gauge-label">
+                                        <textPath href="#numbers-curve" startOffset="80%" text-anchor="middle">35</textPath>
+                                    </text>
+                                    <text class="gauge-label end">
+                                        <textPath href="#numbers-curve" startOffset="99%" text-anchor="end">40</textPath>
+                                    </text>
+
 
                                     <!-- Category Labels (On the arc) -->
                                     <text class="category-label text-dark" dy="-5">
