@@ -1,8 +1,14 @@
-// Food pools have been moved to food-data.js
-// using getFoodData(gender) to retrieve them
-
+// Imports
+import '../styles/global.css'
+import './index.css'
+import { getFoodData } from '../lib/food-data.js'
 
 let currentWeeklyPlan = [];
+
+// Export for inline onclick handlers
+window.saveCardAsImage = saveCardAsImage;
+window.saveWeeklyPlanAsImage = saveWeeklyPlanAsImage;
+
 
 function generateWeeklyPlan(gender = 'female', goal = 'maintain') {
     const days = ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "Chủ Nhật"];

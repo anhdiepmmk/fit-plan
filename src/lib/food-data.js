@@ -195,7 +195,7 @@ const RAW_FOOD_POOLS = {
  * @param {string} goal - 'maintain', 'lose-slow', 'gain-medium', etc.
  * @returns {Object} - Object chứa các mảng morning, lunch, evening đã được xử lý mô tả
  */
-function getFoodData(gender, goal) {
+export function getFoodData(gender, goal) {
     const isGain = goal && goal.startsWith('gain');
 
     const processList = (list) => list.map(item => {

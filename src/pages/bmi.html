@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator - FitPlan</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Tính chỉ số BMI (Body Mass Index) miễn phí với đồng hồ trực quan. Xác định tình trạng cân nặng của bạn ngay lập tức.">
+    <meta name="keywords" content="BMI, Body Mass Index, chỉ số khối cơ thể, tính BMI, kiểm tra cân nặng">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.png" type="image/png">
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+    {{> navbar}}
+
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="container py-5">
+        <header class="text-center mb-5">
+            <h1 class="display-4 fw-bold gradient-text">BMI Calculator</h1>
+            <p class="lead text-muted">Tính chỉ số khối cơ thể của bạn</p>
+        </header>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="glass-card p-4 p-md-5">
+                    <div class="row g-4">
+                        <!-- Input Form -->
+                        <div class="col-md-5">
+                            <h2 class="h5 mb-4"><i class="bi bi-person-fill"></i> Thông tin</h2>
+                            <form id="bmi-form">
+                                <div class="mb-3">
+                                    <label for="age" class="form-label">Tuổi</label>
+                                    <input type="number" class="form-control" id="age" min="2" max="120" value="25" required>
+                                    <div class="invalid-feedback">Tuổi phải từ 2 đến 120</div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label d-block">Giới tính</label>
+                                    <div class="d-flex gap-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="gender" id="gender-male" value="male" checked>
+                                            <label class="form-check-label" for="gender-male">Nam</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="gender" id="gender-female" value="female">
+                                            <label class="form-check-label" for="gender-female">Nữ</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="height" class="form-label">Chiều cao (cm)</label>
+                                    <input type="number" class="form-control" id="height" min="50" max="300" value="170" required>
+                                    <div class="invalid-feedback">Vui lòng nhập chiều cao hợp lệ</div>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="weight" class="form-label">Cân nặng (kg)</label>
+                                    <input type="number" class="form-control" id="weight" min="10" max="500" step="0.1" value="65" required>
+                                    <div class="invalid-feedback">Vui lòng nhập cân nặng hợp lệ</div>
+                                </div>
+                                <div class="d-flex gap-2">
+                                    <button type="submit" class="btn btn-primary flex-grow-1 py-2 fw-bold">
+                                        <i class="bi bi-calculator me-1"></i> Calculate
+                                    </button>
+                                    <button type="button" id="btn-clear" class="btn btn-outline-secondary py-2">
+                                        <i class="bi bi-arrow-counterclockwise"></i> Clear
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Gauge Display -->
+                        <div class="col-md-7">
+                            <div class="bmi-gauge-container">
+                                <svg id="bmi-gauge" viewBox="0 0 200 120" class="bmi-gauge">
+                                    <!-- Background arc segments -->
+                                    <path class="gauge-segment underweight" d="M 20 100 A 80 80 0 0 1 56.9 36.9" />
+                                    <path class="gauge-segment normal" d="M 56.9 36.9 A 80 80 0 0 1 100 20" />
+                                    <path class="gauge-segment normal" d="M 100 20 A 80 80 0 0 1 143.1 36.9" />
+                                    <path class="gauge-segment overweight" d="M 143.1 36.9 A 80 80 0 0 1 167 64" />
+                                    <path class="gauge-segment obesity" d="M 167 64 A 80 80 0 0 1 180 100" />
+                                    
+                                    <!-- Labels -->
+                                    <text x="25" y="95" class="gauge-label">15</text>
+                                    <text x="45" y="45" class="gauge-label">18.5</text>
+                                    <text x="97" y="25" class="gauge-label">22</text>
+                                    <text x="145" y="45" class="gauge-label">25</text>
+                                    <text x="168" y="75" class="gauge-label">30</text>
+                                    <text x="175" y="95" class="gauge-label">40</text>
+                                    
+                                    <!-- Center circle -->
+                                    <circle cx="100" cy="100" r="8" fill="white" stroke="#667eea" stroke-width="2"/>
+                                    
+                                    <!-- Needle -->
+                                    <line id="bmi-needle" x1="100" y1="100" x2="100" y2="30" class="gauge-needle" />
+                                </svg>
+                                
+                                <!-- BMI Value Display -->
+                                <div class="bmi-result text-center mt-3">
+                                    <div class="bmi-value">
+                                        <span id="bmi-value">--</span>
+                                        <span class="bmi-unit">kg/m²</span>
+                                    </div>
+                                    <div id="bmi-category" class="bmi-category">--</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Info -->
+                    <div id="bmi-details" class="mt-4 pt-4 border-top d-none">
+                        <h3 class="h6 mb-3">Thông tin bổ sung</h3>
+                        <div class="row g-3">
+                            <div class="col-6 col-md-3">
+                                <div class="info-box">
+                                    <span class="info-label">Healthy BMI Range</span>
+                                    <span class="info-value">18.5 – 25 kg/m²</span>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="info-box">
+                                    <span class="info-label">Cân nặng lý tưởng</span>
+                                    <span id="healthy-weight" class="info-value">--</span>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="info-box">
+                                    <span class="info-label">BMI Prime</span>
+                                    <span id="bmi-prime" class="info-value">--</span>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="info-box">
+                                    <span class="info-label">Ponderal Index</span>
+                                    <span id="ponderal-index" class="info-value">--</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Page JS (Vite entry) -->
+    <script type="module" src="./bmi.js"></script>
+</body>
+</html>
