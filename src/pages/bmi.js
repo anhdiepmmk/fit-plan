@@ -60,21 +60,32 @@ function calculateMetrics(weight, heightCm, bmi) {
 
     // Weight Goal
     let weightGoal = '';
+    let weightGoalClass = '';
+    
     if (bmi < 18.5) {
         const gain = minHealthyWeight - weight;
         weightGoal = `Tăng ${gain.toFixed(1)} kg để đạt BMI 18.5 kg/m²`;
+        weightGoalClass = 'text-underweight';
     } else if (bmi > 25) {
         const lose = weight - maxHealthyWeight;
         weightGoal = `Giảm ${lose.toFixed(1)} kg để đạt BMI 25 kg/m²`;
+        // Use overweight color if overweight, obesity color if obese
+        if (bmi <= 30) {
+            weightGoalClass = 'text-overweight';
+        } else {
+            weightGoalClass = 'text-obesity';
+        }
     } else {
         weightGoal = 'Bạn đang có cân nặng lành mạnh';
+        weightGoalClass = 'text-normal';
     }
     
     return {
         healthyWeight: `${minHealthyWeight.toFixed(1)} – ${maxHealthyWeight.toFixed(1)} kg`,
         bmiPrime: bmiPrime.toFixed(2),
         ponderalIndex: `${ponderalIndex.toFixed(1)} kg/m³`,
-        weightGoal: weightGoal
+        weightGoal: weightGoal,
+        weightGoalClass: weightGoalClass
     };
 }
 
@@ -146,7 +157,14 @@ form.addEventListener('submit', (e) => {
     document.getElementById('healthy-weight').textContent = metrics.healthyWeight;
     document.getElementById('bmi-prime').textContent = metrics.bmiPrime;
     document.getElementById('ponderal-index').textContent = metrics.ponderalIndex;
-    document.getElementById('weight-goal').textContent = metrics.weightGoal;
+    const weightGoalEl = document.getElementById('weight-goal');
+    weightGoalEl.textContent = metrics.weightGoal;
+    // Remove old classes
+    weightGoalEl.classList.remove('text-underweight', 'text-normal', 'text-overweight', 'text-obesity');
+    // Add new class
+    if (metrics.weightGoalClass) {
+        weightGoalEl.classList.add(metrics.weightGoalClass);
+    }
     
     // Animate needle
     updateNeedle(bmi);
