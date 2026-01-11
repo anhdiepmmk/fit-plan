@@ -8,7 +8,7 @@ const needle = document.getElementById('bmi-needle-group');
 const bmiValueEl = document.getElementById('bmi-value');
 const bmiCategoryEl = document.getElementById('bmi-category');
 const bmiDetailsEl = document.getElementById('bmi-details');
-const btnClear = document.getElementById('btn-clear');
+// const btnClear = document.getElementById('btn-clear'); (Removed)
 
 // BMI Categories
 const BMI_CATEGORIES = [
@@ -57,11 +57,24 @@ function calculateMetrics(weight, heightCm, bmi) {
     
     // Ponderal Index
     const ponderalIndex = weight / (heightM * heightM * heightM);
+
+    // Weight Goal
+    let weightGoal = '';
+    if (bmi < 18.5) {
+        const gain = minHealthyWeight - weight;
+        weightGoal = `Tăng ${gain.toFixed(1)} kg để đạt BMI 18.5 kg/m²`;
+    } else if (bmi > 25) {
+        const lose = weight - maxHealthyWeight;
+        weightGoal = `Giảm ${lose.toFixed(1)} kg để đạt BMI 25 kg/m²`;
+    } else {
+        weightGoal = 'Bạn đang có cân nặng lành mạnh';
+    }
     
     return {
         healthyWeight: `${minHealthyWeight.toFixed(1)} – ${maxHealthyWeight.toFixed(1)} kg`,
         bmiPrime: bmiPrime.toFixed(2),
-        ponderalIndex: `${ponderalIndex.toFixed(1)} kg/m³`
+        ponderalIndex: `${ponderalIndex.toFixed(1)} kg/m³`,
+        weightGoal: weightGoal
     };
 }
 
@@ -133,19 +146,10 @@ form.addEventListener('submit', (e) => {
     document.getElementById('healthy-weight').textContent = metrics.healthyWeight;
     document.getElementById('bmi-prime').textContent = metrics.bmiPrime;
     document.getElementById('ponderal-index').textContent = metrics.ponderalIndex;
+    document.getElementById('weight-goal').textContent = metrics.weightGoal;
     
     // Animate needle
     updateNeedle(bmi);
-});
-
-// Handle clear button
-btnClear.addEventListener('click', () => {
-    form.reset();
-    bmiValueEl.textContent = '--';
-    bmiCategoryEl.textContent = '--';
-    bmiCategoryEl.className = '';
-    // Remove validation states
-    document.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
 });
 
 // Initialize needle position and values
