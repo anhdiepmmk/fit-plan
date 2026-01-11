@@ -72,10 +72,10 @@
                                 </div>
                                 <div class="d-flex gap-2">
                                     <button type="submit" class="btn btn-primary flex-grow-1 py-2 fw-bold">
-                                        <i class="bi bi-calculator me-1"></i> Calculate
+                                        <i class="bi bi-calculator me-1"></i> Tính toán
                                     </button>
                                     <button type="button" id="btn-clear" class="btn btn-outline-secondary py-2">
-                                        <i class="bi bi-arrow-counterclockwise"></i> Clear
+                                        <i class="bi bi-arrow-counterclockwise"></i> Làm mới
                                     </button>
                                 </div>
                             </form>
@@ -168,39 +168,41 @@
                                     </g>
                                 </svg>
                             </div>
+                            
+                            <!-- Additional Info -->
+                            <div id="bmi-details" class="mt-4">
+                                <!-- <h3 class="h6 mb-3 text-center">Thông tin bổ sung</h3> -->
+                                <div class="row g-3">
+                                    <div class="col-6">
+                                        <div class="info-box h-100">
+                                            <span class="info-label">Khoảng BMI lý tưởng</span>
+                                            <span class="info-value">18.5 – 25 kg/m²</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="info-box h-100">
+                                            <span class="info-label">Cân nặng lý tưởng</span>
+                                            <span id="healthy-weight" class="info-value">--</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="info-box h-100">
+                                            <span class="info-label">Tỷ số BMI</span>
+                                            <span id="bmi-prime" class="info-value">--</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="info-box h-100">
+                                            <span class="info-label">Chỉ số Ponderal</span>
+                                            <span id="ponderal-index" class="info-value">--</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Additional Info -->
-                    <div id="bmi-details" class="mt-4 pt-4 border-top d-none">
-                        <h3 class="h6 mb-3">Thông tin bổ sung</h3>
-                        <div class="row g-3">
-                            <div class="col-6 col-md-3">
-                                <div class="info-box">
-                                    <span class="info-label">Healthy BMI Range</span>
-                                    <span class="info-value">18.5 – 25 kg/m²</span>
-                                </div>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <div class="info-box">
-                                    <span class="info-label">Cân nặng lý tưởng</span>
-                                    <span id="healthy-weight" class="info-value">--</span>
-                                </div>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <div class="info-box">
-                                    <span class="info-label">BMI Prime</span>
-                                    <span id="bmi-prime" class="info-value">--</span>
-                                </div>
-                            </div>
-                            <div class="col-6 col-md-3">
-                                <div class="info-box">
-                                    <span class="info-label">Ponderal Index</span>
-                                    <span id="ponderal-index" class="info-value">--</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>

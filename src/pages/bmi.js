@@ -133,7 +133,6 @@ form.addEventListener('submit', (e) => {
     document.getElementById('healthy-weight').textContent = metrics.healthyWeight;
     document.getElementById('bmi-prime').textContent = metrics.bmiPrime;
     document.getElementById('ponderal-index').textContent = metrics.ponderalIndex;
-    bmiDetailsEl.classList.remove('d-none');
     
     // Animate needle
     updateNeedle(bmi);
@@ -145,12 +144,11 @@ btnClear.addEventListener('click', () => {
     bmiValueEl.textContent = '--';
     bmiCategoryEl.textContent = '--';
     bmiCategoryEl.className = '';
-    bmiDetailsEl.classList.add('d-none');
-    resetNeedle();
-    
     // Remove validation states
     document.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
 });
 
-// Initialize needle position
+// Initialize needle position and values
 resetNeedle();
+// Trigger initial calculation based on default values
+form.dispatchEvent(new Event('submit'));
