@@ -8,7 +8,7 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url))
 export default {
   root: 'src/pages',
   base: './',  // Use relative paths for GitHub Pages / static servers
-  publicDir: resolve(__dirname, 'src/assets'),
+  publicDir: resolve(__dirname, 'public'),
   plugins: [
     handlebars({ 
       partialDirectory: resolve(__dirname, 'src/partials') 
