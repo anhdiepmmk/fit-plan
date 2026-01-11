@@ -36,7 +36,7 @@
 }
 
 .gauge-label {
-    font-size: 10px;
+    font-size: 14px;
     font-weight: 700;
     fill: #2d3436;
     dominant-baseline: middle; /* Center vertically on the path */
@@ -142,7 +142,7 @@
 }
 
 .category-label {
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 600;
     pointer-events: none;
     letter-spacing: 0.5px;
