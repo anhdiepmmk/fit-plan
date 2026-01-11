@@ -11,12 +11,14 @@ const bmiDetailsEl = document.getElementById('bmi-details');
 const btnClear = document.getElementById('btn-clear');
 
 // BMI Categories
-const BMI_CATEGORIES = {
-    underweight: { max: 18.5, label: 'Thiếu cân', labelEn: 'Underweight' },
-    normal: { max: 25, label: 'Bình thường', labelEn: 'Normal' },
-    overweight: { max: 30, label: 'Thừa cân', labelEn: 'Overweight' },
-    obesity: { max: Infinity, label: 'Béo phì', labelEn: 'Obesity' }
-};
+const BMI_CATEGORIES = [
+    { max: 18.5, label: 'Gầy', className: 'underweight' },
+    { max: 25, label: 'Bình thường', className: 'normal' },
+    { max: 30, label: 'Thừa cân', className: 'overweight' },
+    { max: 35, label: 'Béo phì độ I', className: 'obesity' },
+    { max: 40, label: 'Béo phì độ II', className: 'obesity' },
+    { max: Infinity, label: 'Béo phì độ III', className: 'obesity' }
+];
 
 // Convert BMI to needle angle (180 degree arc, BMI 15-40 range)
 function bmiToAngle(bmi) {
@@ -28,12 +30,12 @@ function bmiToAngle(bmi) {
     return angle;
 }
 
-// Get BMI category
+// Get BMI category object
 function getCategory(bmi) {
-    if (bmi < BMI_CATEGORIES.underweight.max) return 'underweight';
-    if (bmi < BMI_CATEGORIES.normal.max) return 'normal';
-    if (bmi < BMI_CATEGORIES.overweight.max) return 'overweight';
-    return 'obesity';
+    for (const category of BMI_CATEGORIES) {
+        if (bmi < category.max) return category;
+    }
+    return BMI_CATEGORIES[BMI_CATEGORIES.length - 1];
 }
 
 // Calculate BMI
@@ -117,13 +119,13 @@ form.addEventListener('submit', (e) => {
     
     // Calculate BMI
     const bmi = calculateBMI(weight, height);
-    const category = getCategory(bmi);
+    const categoryObj = getCategory(bmi);
     const metrics = calculateMetrics(weight, height, bmi);
     
     // Update display
     bmiValueEl.textContent = bmi.toFixed(1);
-    bmiCategoryEl.textContent = BMI_CATEGORIES[category].label;
-    bmiCategoryEl.className = `bmi-category ${category}`;
+    bmiCategoryEl.textContent = categoryObj.label;
+    bmiCategoryEl.className = `bmi-category ${categoryObj.className}`;
     
     // Update additional info
     document.getElementById('healthy-weight').textContent = metrics.healthyWeight;

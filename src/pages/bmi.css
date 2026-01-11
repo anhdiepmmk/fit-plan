@@ -20,7 +20,7 @@
 }
 
 .gauge-segment.underweight {
-    stroke: #8b0000; /* Dark Red */
+    stroke: #e74c3c; /* Red (Danger) */
 }
 
 .gauge-segment.normal {
@@ -41,7 +41,9 @@
     fill: #2d3436;
     dominant-baseline: middle; /* Center vertically on the path */
     pointer-events: none;
+    font-family: 'Outfit', sans-serif;
 }
+
 
 
 
@@ -96,8 +98,8 @@
 }
 
 .bmi-category.underweight {
-    background: rgba(52, 152, 219, 0.15);
-    color: #3498db;
+    background: rgba(231, 76, 60, 0.15);
+    color: #e74c3c;
 }
 
 .bmi-category.normal {
