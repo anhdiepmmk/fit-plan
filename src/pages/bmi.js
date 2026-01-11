@@ -125,7 +125,9 @@ form.addEventListener('submit', (e) => {
     // Update display
     bmiValueEl.textContent = bmi.toFixed(1);
     bmiCategoryEl.textContent = categoryObj.label;
-    bmiCategoryEl.className = `bmi-category ${categoryObj.className}`;
+    // Check if categoryObj.className adds text colors like text-danger etc.
+    // We added text-underweight, text-normal, etc to bmi.css
+    bmiCategoryEl.className = `text-${categoryObj.className}`;
     
     // Update additional info
     document.getElementById('healthy-weight').textContent = metrics.healthyWeight;
@@ -142,7 +144,7 @@ btnClear.addEventListener('click', () => {
     form.reset();
     bmiValueEl.textContent = '--';
     bmiCategoryEl.textContent = '--';
-    bmiCategoryEl.className = 'bmi-category';
+    bmiCategoryEl.className = '';
     bmiDetailsEl.classList.add('d-none');
     resetNeedle();
     

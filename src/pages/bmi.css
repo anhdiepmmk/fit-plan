@@ -155,3 +155,25 @@
 .category-label.text-dark {
     fill: #2d3436;
 }
+
+/* Category Text Colors */
+.text-underweight { 
+    color: #e74c3c !important; 
+    -webkit-text-fill-color: #e74c3c !important;
+    background: none !important;
+}
+.text-normal { 
+    color: #2ecc71 !important; 
+    -webkit-text-fill-color: #2ecc71 !important;
+    background: none !important;
+}
+.text-overweight { 
+    color: #f1c40f !important; 
+    -webkit-text-fill-color: #f1c40f !important;
+    background: none !important;
+}
+.text-obesity { 
+    color: #e74c3c !important; 
+    -webkit-text-fill-color: #e74c3c !important;
+    background: none !important;
+}

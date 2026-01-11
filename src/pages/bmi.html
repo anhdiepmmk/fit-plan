@@ -84,6 +84,13 @@
                         <!-- Gauge Display -->
                         <div class="col-md-7">
                             <div class="bmi-gauge-container">
+                                <!-- BMI Value Display -->
+                                <div class="bmi-result text-center mb-4">
+                                    <h3 class="bmi-text gradient-text fw-bold">
+                                        BMI = <span id="bmi-value">--</span> kg/m² (<span id="bmi-category">--</span>)
+                                    </h3>
+                                </div>
+
                                 <svg id="bmi-gauge" viewBox="-30 0 360 180" class="bmi-gauge">
                                     <!-- Background arc segments (Calculated for Radius 100, Stroke 40) center 150,150 -->
                                     <!-- Added 1 degree overlap to prevent gaps -->
@@ -160,15 +167,6 @@
                                         <circle cx="0" cy="0" r="6" class="needle-pivot" />
                                     </g>
                                 </svg>
-                                
-                                <!-- BMI Value Display -->
-                                <div class="bmi-result text-center mt-3">
-                                    <div class="bmi-value">
-                                        BMI = <span id="bmi-value">--</span>
-                                        <span class="bmi-unit">kg/m²</span>
-                                    </div>
-                                    <div id="bmi-category" class="bmi-category">--</div>
-                                </div>
                             </div>
                         </div>
                     </div>
